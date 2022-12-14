@@ -1,0 +1,28 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  height: 100vh;
+}
+.cartMenu {
+  margin-top: 2rem;
+}
+.cardDetails {
+  height: 80vh;
+  width: 100vh;
+
+  justify-content: center;
+  align-items: center;
+}
+.cardDetails p {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  font-size: larger;
+}
+.cardDetails .closeIcon {
+  float: right;
+  cursor: pointer;
+}

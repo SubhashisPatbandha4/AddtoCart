@@ -1,0 +1,10 @@
+
+.cardItem .cardImage {
+  height: 16rem;
+  border-radius: 20px;
+  transition: 0.5s ease;
+}
+.cardImage:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}
