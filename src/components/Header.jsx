@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -12,10 +12,13 @@ import { useSelector } from 'react-redux';
 import { Table } from 'react-bootstrap';
 // import { RoundedCornerOutlined } from '@mui/icons-material';
 import DeleteIcon from '@mui/icons-material/Delete';
-
-
+import { remove } from "../redux/actions/action"
+import { useDispatch } from 'react-redux';
 const Header = () => {
     const getData = useSelector(state => state.cartReducer.carts)
+    const dispatch = useDispatch()
+
+    const [price, setPrice] = useState(0)
 
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
@@ -26,6 +29,16 @@ const Header = () => {
         setAnchorEl(null);
     };
 
+    const total = () => {
+        let price = 0;
+        getData.map(product => (
+            price = price + product.price * product.qnty
+        ))
+        setPrice(price)
+    }
+    useEffect(() => {
+        total()
+    }, [total]);
     return (
         <div>
             <Navbar bg="dark" variant="dark" expand="lg" style={{ top: "0", position: "fixed", zIndex: "101", width: "100%" }} >
@@ -68,7 +81,7 @@ const Header = () => {
                                             {
                                                 getData.map((product) => (
                                                     <tr>
-                                                        <NavLink to={`/cardDetails/${product.id}`}>
+                                                        <NavLink to={`/cardDetails/${product.id}`} onClick={handleClose}>
 
                                                             <td>
                                                                 <img src={product.image} style={{ height: "5rem", width: "5rem" }} alt="pic" />
@@ -82,13 +95,13 @@ const Header = () => {
 
                                                         </td>
                                                         <td>
-                                                            <DeleteIcon style={{ color: "red", cursor: "pointer" }} />
+                                                            <DeleteIcon style={{ color: "red", cursor: "pointer" }} onClick={() => dispatch(remove(product.id))} />
 
                                                         </td>
                                                     </tr>
                                                 ))
                                             }
-                                            <p>Total : 300  </p>
+                                            <p>Total : {price} </p>
                                         </tbody>
                                     </Table>
                                 </div> :

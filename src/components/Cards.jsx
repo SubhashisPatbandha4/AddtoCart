@@ -5,7 +5,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import "./cards.css"
 import CardsData from "./CardsData"
 import { useSelector, useDispatch } from 'react-redux';
-import { updateCart } from "../redux/actions/action"
+import { add } from "../redux/actions/action"
 const Cards = () => {
     const myCart = useSelector(state => state.cartReducer)
     // console.log(myCart)
@@ -34,7 +34,7 @@ const Cards = () => {
 
                                 </ListGroup>
 
-                                <Button variant='warning col-lg-12' onClick={() => dispatch(updateCart(card))}>Add To Cart</Button>
+                                <Button variant='warning col-lg-12' onClick={() => dispatch(add(card))}>Add To Cart</Button>
                             </Card.Body>
                         </Card>
                     ))
